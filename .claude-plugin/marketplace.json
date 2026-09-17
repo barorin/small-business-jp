@@ -1,0 +1,17 @@
+{
+  "name": "small-business-jp",
+  "owner": {
+    "name": "barorin"
+  },
+  "metadata": {
+    "description": "日本の中小企業・個人事業主向け Claude プラグイン（small-business 日本版）"
+  },
+  "plugins": [
+    {
+      "name": "small-business-jp",
+      "displayName": "中小企業向けビジネスアシスタント",
+      "source": "./",
+      "description": "日本の中小企業・個人事業主向けの業務ワークフロー集。資金繰り、月次締め、請求書の督促、給与計算準備、決算・法定調書、営業・マーケティング、採用、契約書レビュー、補助金申請まで。お金と顧客に触れるステップは必ずあなたが承認します。"
+    }
+  ]
+}

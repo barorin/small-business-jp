@@ -1,0 +1,35 @@
+{
+  "name": "small-business-jp",
+  "displayName": "中小企業向けビジネスアシスタント",
+  "version": "1.35.1",
+  "description": "日本の中小企業・個人事業主向けに作り込んだ業務ワークフロー集。資金繰り、月次締め、請求書の督促、支払い、給与計算準備、決算・法定調書、営業・マーケティング、口コミ対応、採用、契約書レビュー、補助金申請まで。freee会計・マネーフォワード クラウド会計などお使いのツールに接続でき、お金と顧客に触れるステップは必ずあなたが承認します。インストール後は「初期設定をして」と話しかけてください。",
+  "author": {
+    "name": "barorin"
+  },
+  "repository": "https://github.com/barorin/small-business-jp",
+  "license": "Apache-2.0",
+  "keywords": [
+    "all-in-one",
+    "automation",
+    "finance",
+    "growth",
+    "hr",
+    "marketing",
+    "operations",
+    "sales",
+    "small-business",
+    "smb",
+    "taxes",
+    "workflow",
+    "zapier",
+    "japan",
+    "日本",
+    "中小企業",
+    "個人事業主",
+    "インボイス",
+    "消費税",
+    "資金繰り",
+    "freee",
+    "マネーフォワード"
+  ]
+}

@@ -1,0 +1,323 @@
+<!doctype html>
+<!-- ハウススタイルの参照実装。金額は書式の見本。実際のページでは
+     事業者の保存された通貨設定に従う（円が既定。外貨は ISO コード前置。
+     shared/currency-and-locale.md 参照）。 -->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>資金繰りスナップショット</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;600&family=BIZ+UDPGothic:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #17211F;
+    --paper: #F4F3EE;
+    --paper-raised: #FFFFFF;
+    --line: #DEDCD1;
+    --accent: #0B6B5C;
+    --accent-soft: #E4EFEC;
+    --amber: #B9781F;
+    --amber-soft: #F6EBDA;
+    --good: #2E7D4F;
+    --good-soft: #E4F0E8;
+    --warn: #B9781F;
+    --warn-soft: #F6EBDA;
+    --critical: #B3392C;
+    --critical-soft: #FBEAE7;
+    --font-display: 'Noto Serif JP', 'Zilla Slab', Georgia, serif;
+    --font-body: 'BIZ UDPGothic', 'Noto Sans JP', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Noto Sans JP', 'SF Mono', Consolas, monospace;
+    --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem;
+    --text-lg: 1.125rem; --text-xl: 1.375rem; --text-2xl: 1.75rem; --text-3xl: 2.25rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #EDEAE2; --paper: #14201C; --paper-raised: #1B2A25; --line: #2C3A34;
+      --accent: #4FBFA5; --accent-soft: #1E332C; --amber: #E0A559; --amber-soft: #362A16;
+      --good: #6FCB94; --good-soft: #1D3226; --warn: #E0A559; --warn-soft: #362A16;
+      --critical: #E37B6B; --critical-soft: #3A211C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #EDEAE2; --paper: #14201C; --paper-raised: #1B2A25; --line: #2C3A34;
+    --accent: #4FBFA5; --accent-soft: #1E332C; --amber: #E0A559; --amber-soft: #362A16;
+    --good: #6FCB94; --good-soft: #1D3226; --warn: #E0A559; --warn-soft: #362A16;
+    --critical: #E37B6B; --critical-soft: #3A211C;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3rem;
+  }
+  .panel {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .brand-mark {
+    flex: 0 0 auto;
+    width: 44px; height: 44px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font: 600 1.05rem var(--font-display);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-2xl);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .page-header .meta {
+    margin: 0.15rem 0 0;
+    font-size: var(--text-sm);
+    color: var(--ink);
+    opacity: 0.65;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+  }
+  .stat-tile { text-align: left; }
+  .stat-figure {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-3xl);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .stat-label {
+    margin-top: 0.35rem;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+  }
+  .stat-context {
+    margin: 0.6rem 0 0;
+    font-size: var(--text-sm);
+    color: var(--ink);
+    opacity: 0.85;
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    margin: 0 0 0.75rem;
+  }
+
+  .status {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
+    font: 600 var(--text-xs) var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .status--good { background: var(--good-soft); color: var(--good); }
+  .status--warn { background: var(--warn-soft); color: var(--warn); }
+  .status--critical { background: var(--critical-soft); color: var(--critical); }
+
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+  th {
+    text-align: left;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+    opacity: 0.7;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: none; }
+  .num {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .copy-block { position: relative; }
+  .copy-block pre {
+    margin: 0;
+    background: var(--accent-soft);
+    border-radius: 6px;
+    padding: 1rem 5.5rem 1rem 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    white-space: pre-wrap;
+    color: var(--ink);
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    font: 600 var(--text-xs) var(--font-body);
+    background: var(--paper-raised);
+    color: var(--accent);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--accent-soft); }
+  .copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .checklist { display: flex; flex-direction: column; gap: 0.5rem; }
+  .checklist-progress {
+    margin: 0 0 0.5rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .checklist label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--text-sm);
+  }
+  .checklist input[disabled] { accent-color: var(--accent); }
+
+  .page-footer {
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--ink);
+    opacity: 0.5;
+    padding-top: 0.5rem;
+  }
+  .page-footer strong { font-weight: 600; opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="page-header">
+    <div class="brand-mark">岡</div>
+    <div>
+      <h1>資金繰りスナップショット</h1>
+      <p class="meta">岡本設備工業 · 2026年8月21日 生成</p>
+    </div>
+  </header>
+
+  <section class="panel">
+    <h2 class="section-title">全体像</h2>
+    <div class="stat-row">
+      <div class="stat-tile">
+        <div class="stat-figure">6,240,000円</div>
+        <div class="stat-label">手元資金</div>
+        <p class="stat-context">現在の支出ペースで約11週間分の余裕。</p>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-figure">934,000円</div>
+        <div class="stat-label">期限超過の売掛金</div>
+        <p class="stat-context">6件。最長で34日超過。</p>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-figure">2,150,000円</div>
+        <div class="stat-label">今週の支払予定</div>
+        <p class="stat-context">給与と仕入先2社への支払い。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">期限超過の請求書</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>取引先</th><th>金額</th><th>超過日数</th><th>状態</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>株式会社コーウィン商会</td><td class="num">182,400円</td><td class="num">34</td><td><span class="status status--critical">期限超過</span></td></tr>
+          <tr><td>ローズウッド不動産</td><td class="num">304,500円</td><td class="num">18</td><td><span class="status status--warn">要確認</span></td></tr>
+          <tr><td>佐藤運輸株式会社</td><td class="num">142,000円</td><td class="num">6</td><td><span class="status status--good">順調</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">督促メールにそのまま貼り付け</h2>
+    <div class="copy-block">
+      <button class="copy-btn" onclick="copyBlock(this)">コピー</button>
+      <pre>株式会社コーウィン商会 田中様
+
+お世話になっております。岡本設備工業の岡本です。
+請求書 No.1042（182,400円、税込）につきまして、お支払期日を過ぎておりましたのでご確認をお願いいたします。
+行き違いでお振込済みでしたらご容赦ください。こちらで必要な書類などがあればお知らせください。
+
+よろしくお願いいたします。
+岡本設備工業 岡本</pre>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">月次締め</h2>
+    <div class="checklist">
+      <p class="checklist-progress">5件中3件完了</p>
+      <label><input type="checkbox" checked disabled> 銀行明細を突合済み</label>
+      <label><input type="checkbox" checked disabled> 給与仕訳を計上</label>
+      <label><input type="checkbox" checked disabled> 仕入先の請求書を入力</label>
+      <label><input type="checkbox" disabled> 消費税区分（インボイス）を確認</label>
+      <label><input type="checkbox" disabled> 月次を確定（帳簿ロック）</label>
+    </div>
+  </section>
+
+  <footer class="page-footer"><strong>資金繰りスナップショット</strong> が生成 — 中小企業向けビジネスアシスタント</footer>
+
+</div>
+
+<script>
+function copyBlock(btn) {
+  const pre = btn.nextElementSibling;
+  const text = pre.textContent;
+  const done = () => { btn.textContent = 'コピーしました'; setTimeout(() => btn.textContent = 'コピー', 1500); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackSelect(pre, btn));
+  } else {
+    fallbackSelect(pre, btn);
+  }
+}
+function fallbackSelect(pre, btn) {
+  const range = document.createRange();
+  range.selectNodeContents(pre);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+  btn.textContent = '選択しました — Cmd/Ctrl+C を押してください';
+  setTimeout(() => btn.textContent = 'コピー', 2500);
+}
+</script>
+</body>
+</html>
