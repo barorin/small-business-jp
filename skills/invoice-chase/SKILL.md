@@ -14,6 +14,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 売掛金の督促
 
 ## クイックスタート

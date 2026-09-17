@@ -4,6 +4,8 @@ description: 静かに買わなくなった顧客を呼び戻す — 本人の�
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 休眠顧客の掘り起こしチェーンを実行する：`review-reputation` で誰が静かになり、なぜかを見つけ、`outreach-composer` で書き、`crm-autopilot` で記録する。経営者は受け渡しごと、メッセージごとに承認する。
 
 コネクタ：CRM（HubSpot、kintone、Monday.com、Salesforce、Zoho CRM のいずれか）、決済サービス（PayPal、Square、Stripe のいずれか）、ネットショップ・POS（Shopify または Square）のいずれかが背骨 — 誰が何をいつ買ったかを知るのに 1 つは必須で、同一カテゴリ内は同格（`../../shared/connector-neutrality.md`）。ネットショップ・POS だけでも足りる：顧客一覧（Shopify `list-customers`）と注文履歴（`list-orders`、`get-order`）が購入のリズムそのものだ。メール（Gmail または Microsoft 365）が送信を加える。ネットショップ・POS は注文と出荷のパターンも、それ自体が離反のシグナルとして加える。会計ソフト（freee会計、マネーフォワード クラウド会計、弥生会計 など）は取引先別の売上・請求履歴を加える — マネーフォワードなら補助科目付きの残高試算表（`getReportsTrialBalanceProfitLoss` に `with_sub_accounts: true`。売上高や売掛金の補助科目を取引先で持っている場合）、または `getJournals` を取引先で絞って請求日と金額を読む。freee なら取引先別の取引（収入）と請求書、弥生なら売上帳・得意先元帳の CSV。海外製（Zoho Books `list_invoices` を `customer_id` で絞る など）も同格。これが顧客のリズムと価値の最もきれいな読み取りになる。サポート（Zoho Desk）は対応履歴を加える — 沈黙の隣に未解決の問い合わせがあれば、それは謎ではなく理由であり、その顧客はメールの連続送信ではなく経営者の架電リストに移る。LINE公式アカウント（`build-connector` 経由）が接続されていれば、友だち登録済みの顧客への配信という手段が増える。どれもなければ、エクスポートした顧客一覧と貼り付けた口コミを入力にし、経営者が手で送る掘り起こしの下書きを出す。

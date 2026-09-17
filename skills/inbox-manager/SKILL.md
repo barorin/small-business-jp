@@ -15,6 +15,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 受信箱の整理
 
 受信箱を、メールの山ではなく、判断すべきことの短いリストに変える。

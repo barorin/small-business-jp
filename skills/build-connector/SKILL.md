@@ -15,6 +15,8 @@ description: >
 allowed-tools: Read, WebFetch, ToolSearch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # コネクタビルダー
 
 対応外のツールを、接続済みのツールに変える。

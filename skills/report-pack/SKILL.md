@@ -4,6 +4,8 @@ description: 経営者専用の定例レポートパックを届ける — repor
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 定例レポートパック
 
 二つのスキルをチェーンし、経営者の定例の数字が、行動に足る文脈付きで届くようにする: パック本体は `report-builder`、周りの全体像は `business-pulse`。

@@ -16,6 +16,8 @@ compatibility: "貼り付け・転送されたテキストだけで動く。Atla
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 顧客対応（Ticket Deflector）
 
 ## クイックスタート

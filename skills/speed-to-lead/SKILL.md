@@ -16,6 +16,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 問い合わせ即応（Speed to Lead）
 
 すべての問い合わせに、経営者がデスクにいなくても、経営者の声で素早く答える。

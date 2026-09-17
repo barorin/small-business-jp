@@ -17,6 +17,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 支払請求書の処理
 
 請求書の山を、勘定科目のついた仕訳案と、一回の支払判断に変える。

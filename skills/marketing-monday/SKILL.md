@@ -4,6 +4,8 @@ description: 週次の成長ブリーフを一枚に統合して届ける — �
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 週次の成長ブリーフを、二つのスキルをチェーンして実行する — `growth-pulse` で仕組みが回っているかを、`review-reputation` で顧客が何と言っているかを — そのうえで Web 調査による競合スキャンを加える。三つの部分は一つに統合したブリーフに流れ込む。三つの報告書をホチキスで留めたものではない。
 
 コネクタ：PayPal、Shopify、HubSpot のいずれか一つあれば動く。Apollo、Clay、Mailchimp、Square、Stripe、TikTok広告はそれぞれ層を一つ加える。TikTok広告は growth-pulse 経由でステップ1 に有料広告の層を加える：先週の広告費、成果数、成果単価を売上推移の隣に置き、プラットフォーム自身の主張として CRM のリード数と並べて報告し、決して混ぜない（`../growth-pulse/reference/data_sources.md`）。Google 広告・Yahoo!広告・Meta広告・LINE広告は `build-connector` で作った連携か CSV エクスポートから。Mailchimp はステップ1 にメールのチャネルを加える（`get_capabilities` の呼び出しには `user_request` と `category` が要る。`../../shared/connector-call-shapes.md`）— 売上帰属つきのキャンペーン分析とオーディエンス増減の数字。このブリーフでは読み取り専用で、ここから下書きも送信もしない。帰属売上はメールチャネル自身の主張としてプラットフォームと CRM の数字の隣に報告し、一つの数字に混ぜない。どれもなければ CSV エクスポートと貼り付けた口コミが入力になり、競合スキャンはコネクタなしで Web 調査として動く。

@@ -16,6 +16,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # SNSコンテンツ制作
 
 経営者が Canva を開かなくても、一貫して、ブランドに沿って、本人の声で投稿し続けられるようにする。

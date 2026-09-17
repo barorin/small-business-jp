@@ -16,6 +16,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # スキルビルダー（作業の自動化）
 
 経営者が毎週やっていることを、名前で頼めるものに変える。
@@ -62,6 +64,7 @@ allowed-tools: Read, WebFetch
 
 - `name` とフォルダ名が一致し、英語の小文字とハイフンのみ（日本語は入れない）
 - frontmatter のキー（`name`、`description`、`allowed-tools`）は英語のまま。`description` は日本語で、何をするか **と** いつ発火するかを三人称で書き、経営者が実際に使う日本語の言い回しを含める
+- frontmatter の直後に、応答を日本語に固定する一行を入れる（同梱スキルと同じ文言。`../../shared/response-language.md`）
 - コネクタがないときの本物の代替経路がある
 - 結果が重いものすべてに承認ゲートがある
 - 数字を決して創作しない。欠けたデータは欠けていると報告する

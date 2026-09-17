@@ -80,6 +80,7 @@ upstream の `small-business/<path>` は、基本的にこちらの `<path>` に
 
 - **日本語で書く。** 既存の文体に合わせる: `README.md` はです・ます調、`SKILL.md`・
   `reference/`・`shared/` はだ・である調。英語の原文をそのまま残さない。
+- **応答言語の一行を残す。** すべての `SKILL.md` は frontmatter の直後に「**応答は常に日本語で書く。** …（`../../shared/response-language.md`）」の一行を持つ。upstream から新しいスキルを移植するときも必ず入れる。
 - **制度と製品を日本のものに置き換える。** 例: QuickBooks / Xero / Zoho Books /
   MYOB → freee会計・マネーフォワード クラウド会計・弥生会計、1099 → 法定調書・
   支払調書、sales tax → 消費税・インボイス制度、quarterly estimated tax → 予定納税、

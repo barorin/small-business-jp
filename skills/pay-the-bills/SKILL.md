@@ -4,6 +4,8 @@ description: 支払請求書の山を、受信箱から総合振込データの�
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 支払業務（Pay The Bills）
 
 三つのスキルをつなぎ、取引先への支払いを「午後いっぱいの作業」ではなく「一つの判断」にする：請求書は `ap-processor`、資金の確認は `cash-flow-snapshot`、帳簿は `month-end-prep`。

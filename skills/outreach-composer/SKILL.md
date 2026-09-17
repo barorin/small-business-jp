@@ -15,6 +15,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 営業メール作成
 
 経営者が自分の名前で本当に送れる営業メールを書く。

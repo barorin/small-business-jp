@@ -4,6 +4,8 @@ description: 実際に売れているものを発注の判断に変え、帳簿�
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 発注・補充
 
 二つのスキルをつなぎ、発注が忘れられたメールではなく帳簿の記録で終わるようにする：`inventory-planner` が何を買うかを決め、`ap-processor` がそれがいくらになるかを準備する。

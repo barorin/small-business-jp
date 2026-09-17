@@ -17,6 +17,8 @@ description: >
 allowed-tools: Read, WebFetch
 ---
 
+**応答は常に日本語で書く。** 読んだデータや参照ファイルが英語でも、経営者への返答・確認・成果物は日本語にする（`../../shared/response-language.md`）。
+
 # 補助金・公募申請書作成（Grant and RFP Writer）
 
 追いかける価値のある案件を見つけ、価値のないものを切り、残りを事業者が実際にやってきたことから下書きする。
